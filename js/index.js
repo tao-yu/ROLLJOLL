@@ -1,12 +1,14 @@
+var oll = document.getElementById("oll");
+var submitOll = document.getElementById("submitOll");
+
 var urlString = window.location.href;
 var url = new URL(urlString);
 var ollAlgFromUrl = url.searchParams.get("alg");
 if (ollAlgFromUrl !== null){
     updateImages(ollAlgFromUrl);
+    oll.value = ollAlgFromUrl;    
 }
 
-var oll = document.getElementById("oll");
-var submitOll = document.getElementById("submitOll");
 submitOll.addEventListener("click", function(){
     updateImages(oll.value);
 });
