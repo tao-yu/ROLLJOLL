@@ -11,12 +11,20 @@ submitOll.addEventListener("click", function(){
         "adjr":"U F2 D F D' F L2' B' U B L2 U",
     }
 
+    var arrows = {
+        "noswap":"",
+        "diag":"&arw=U0U8,U8U0",
+        "adjf":"&arw=U6U8,U8U6",
+        "adjb":"&arw=U0U2,U2U0",
+        "adjl":"&arw=U0U6,U6U0",
+        "adjr":"&arw=U2U8,U8U2",
+    }
+
     var ollAlg = oll.value;
-    var visualcubeUrl = "https://cubing.net/api/visualcube/?fmt=jpg&stage=cll&view=plan&case="
-    document.getElementById("img_noswap").src = visualcubeUrl + ollAlg + swapAlgs["noswap"];
-    document.getElementById("img_diag").src = visualcubeUrl + ollAlg + swapAlgs["diag"];
-    document.getElementById("img_adjf").src = visualcubeUrl + ollAlg + swapAlgs["adjf"];
-    document.getElementById("img_adjb").src = visualcubeUrl + ollAlg + swapAlgs["adjb"];
-    document.getElementById("img_adjl").src = visualcubeUrl + ollAlg + swapAlgs["adjl"];
-    document.getElementById("img_adjr").src = visualcubeUrl + ollAlg + swapAlgs["adjr"];
+    var visualcubeUrl = "https://cubing.net/api/visualcube/?fmt=jpg&stage=coll&view=plan&case="
+
+    cornerPerms = ["noswap", "diag", "adjf", "adjb", "adjl", "adjr"]
+    cornerPerms.forEach(perm => {
+        document.getElementById(perm).src = visualcubeUrl + ollAlg + swapAlgs[perm] + arrows[perm];
+    });
 });
