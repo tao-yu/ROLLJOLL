@@ -1,6 +1,17 @@
+var urlString = window.location.href;
+var url = new URL(urlString);
+var ollAlgFromUrl = url.searchParams.get("alg");
+if (ollAlgFromUrl !== null){
+    updateImages(ollAlgFromUrl);
+}
+
 var oll = document.getElementById("oll");
 var submitOll = document.getElementById("submitOll");
 submitOll.addEventListener("click", function(){
+    updateImages(oll.value);
+});
+
+function updateImages(ollAlg){
     
     var swapAlgs = {
         "noswap":"",
@@ -19,13 +30,12 @@ submitOll.addEventListener("click", function(){
         "adjl":"&arw=U0U6,U6U0",
         "adjr":"&arw=U2U8,U8U2",
     }
-
-    var ollAlg = oll.value;
+    
     var visualcubeUrl = "https://cubing.net/api/visualcube/?fmt=jpg&stage=coll&view=plan&case="
 
     cornerPerms = ["noswap", "diag", "adjf", "adjb", "adjl", "adjr"]
     cornerPerms.forEach(perm => {
         document.getElementById(perm).src = visualcubeUrl + ollAlg + swapAlgs[perm] + arrows[perm];
     });
-    window.history.pushState('page2', 'Title', "?&alg=" + encodeURI(ollAlg));
-});
+    window.history.pushState(ollAlg, ollAlg, "?alg=" + encodeURI(ollAlg));
+}
