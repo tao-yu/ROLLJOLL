@@ -27,4 +27,5 @@ submitOll.addEventListener("click", function(){
     cornerPerms.forEach(perm => {
         document.getElementById(perm).src = visualcubeUrl + ollAlg + swapAlgs[perm] + arrows[perm];
     });
+    window.history.pushState('page2', 'Title', "?&alg=" + encodeURI(ollAlg));
 });
