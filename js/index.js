@@ -50,80 +50,16 @@ function updateJOLLImages(ollAlg){
 
 }
 
+
+var rc = new RubiksCube();
+console.log(rc.cubestate)
 //CUBE OBJECT
 function RubiksCube() {
-    this.cubestate = [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6];
+    this.cubestate = [1, "go", 1, "ro", 1, "ro", 1, "go", 1, 2, "ru", 2, 2, 2, 2, 2, 2, 2, 3, "gu", 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, "ru", 5, 5, 5, 5, 5, 5, 5, 6, "gu", 6, 6, 6, 6, 6, 6, 6];
 
     this.resetCube = function(){
-        this.cubestate = [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6];
-    }
-    this.solution = function(){
-        var gcube = Cube.fromString(this.toString());
-        return gcube.solve();
-    }
-
-    this.isSolved = function(){
-        for (var i = 0; i<6;i++){
-            var colour1 = this.cubestate[9*i];
-            for (var j = 0; j<8; j++){
-                if (this.cubestate[9*i + j + 1]!=colour1){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    this.wcaOrient = function() {
-        // u-r--f--d--l--b
-        // 4 13 22 31 40 49
-        //
-        var moves = "";
-
-        if (this.cubestate[13]==1) {//R face
-            this.doAlgorithm("z'");
-            moves +="z'";
-        } else if (this.cubestate[22]==1) {//on F face
-            this.doAlgorithm("x");
-            moves+="x";
-        } else if (this.cubestate[31]==1) {//on D face
-            this.doAlgorithm("x2");
-            moves+="x2";
-        } else if (this.cubestate[40]==1) {//on L face
-            this.doAlgorithm("z");
-            moves+="z";
-        } else if (this.cubestate[49]==1) {//on B face
-            this.doAlgorithm("x'");
-            moves+="x'";
-        }
-
-        if (this.cubestate[13]==3) {//R face
-            this.doAlgorithm("y");
-            moves+="y";
-        } else if (this.cubestate[40]==3) {//on L face
-            this.doAlgorithm("y'");
-            moves+="y'";
-        } else if (this.cubestate[49]==3) {//on B face
-            this.doAlgorithm("y2");
-            moves+="y2";
-        }
-
-        return moves;
-    }
-    this.toString = function(){
-        var str = "";
-        var i;
-        var sides = ["U","R","F","D","L","B"]
-        for(i=0;i<this.cubestate.length;i++){
-            str+=sides[this.cubestate[i]-1];
-        }
-        return str;
-
-    }
-
-
-    this.test = function(alg){
-        this.doAlgorithm(alg);
-        drawCube(this.cubestate);
+        
+        this.cubestate = [1, "go", 1, "ro", 1, "ro", 1, "go", 1, 2, "ru", 2, 2, 2, 2, 2, 2, 2, 3, "gu", 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, "ru", 5, 5, 5, 5, 5, 5, 5, 6, "gu", 6, 6, 6, 6, 6, 6, 6];
     }
 
     this.doAlgorithm = function(alg) {
@@ -216,17 +152,6 @@ function RubiksCube() {
 
         }
 
-    }
-
-    this.solveNoRotate = function(){
-        //Center sticker indexes: 4, 13, 22, 31, 40, 49
-        cubestate = this.cubestate;
-        this.cubestate = [cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],
-                          cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],
-                          cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],
-                          cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],
-                          cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],
-                          cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49]];
     }
 
     this.doU = function(times) {
