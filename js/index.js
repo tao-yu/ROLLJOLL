@@ -58,6 +58,9 @@ function updateROLLImages(ollAlg){
 }
 
 function updateJOLLImages(ollAlg){
+    document.getElementById("joll_opp").innerHTML = "";
+    document.getElementById("joll_adj").innerHTML = "";
+
     inverted = alg.cube.invert(ollAlg);
     var rc = new RubiksCube();
     rc.doAlgorithm(inverted);
@@ -68,26 +71,31 @@ function updateJOLLImages(ollAlg){
     pairs.forEach(pair => {
         var edge1 = cs[pair[0]];
         var edge2 = cs[pair[1]];
-        var numToLoc = {1:"b", 3:"l", 5:"r", 7:"f"};
-        var loc1 = numToLoc[pair[0]];
-        var loc2 = numToLoc[pair[1]];
-        if (edge1[0] == edge2[0]){ //opposite relationship
+
+        var opp1 = [1,7,19,46];
+        var opp2 = [3,5,37, 10];
+
+        var otherSide = {1:46, 5:10, 7:19, 3:37};
+        var loc1 = edge1 > 8? pair[0] : otherSide[pair[0]];
+        var loc2 = edge2 > 8? pair[1] : otherSide[pair[1]];
+
+        if ((opp1.includes(edge1) & opp1.includes(edge2)) || (opp2.includes(edge1) & opp2.includes(edge2))){ //opposite relationship
             jollList.push({
-                "edge1":loc1, 
-                "edge2":loc2,
+                "loc1":loc1, 
+                "loc2":loc2,
                 "relation":"opp",
                 "implies":"opp"
             });
             jollList.push({
-                "edge1":loc1, 
-                "edge2":loc2,
+                "loc1":loc1, 
+                "loc2":loc2,
                 "relation":"adj",
                 "implies":"adj"
             });
         } else { //adjacent relationship
             jollList.push({
-                "edge1":loc1, 
-                "edge2":loc2,
+                "loc1":loc1, 
+                "loc2":loc2,
                 "relation":"opp",
                 "implies":"adj"
             });
@@ -95,7 +103,26 @@ function updateJOLLImages(ollAlg){
     });
 
     jollList.forEach(joll => {
-        console.log(joll);
+        var fc = Array(54).fill("l");
+        if (joll["relation"] == "opp"){
+            fc[joll["loc1"]] = "r";
+            fc[joll["loc2"]] = "r";
+        }
+        else {
+            fc[joll["loc1"]] = "r";
+            fc[joll["loc2"]] = "g";
+        }
+        
+        var url = "https://cubing.net/api/visualcube/?fmt=jpg&view=plan&fc=" + fc.join("");
+
+        var img = document.createElement("img");
+        img.src = url;
+
+        if (joll["implies"] == "opp"){
+            document.getElementById("joll_opp").appendChild(img);
+        } else {
+            document.getElementById("joll_adj").appendChild(img);
+        }
     });
 
 }
@@ -103,13 +130,11 @@ function updateJOLLImages(ollAlg){
 
 //CUBE OBJECT
 function RubiksCube() {
-    this.cubestate = [1, "go", 1, "ro", 1, "ro", 1, "go", 1, 2, "ru", 2, 2, 2, 2, 2, 2, 2, 3, "gu", 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, "ru", 5, 5, 5, 5, 5, 5, 5, 6, "gu", 6, 6, 6, 6, 6, 6, 6];
-
+    this.cubestate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53];
     //go = green oriented, ru = red unoriented etc.
 
     this.resetCube = function(){
-        
-        this.cubestate = [1, "go", 1, "ro", 1, "ro", 1, "go", 1, 2, "ru", 2, 2, 2, 2, 2, 2, 2, 3, "gu", 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, "ru", 5, 5, 5, 5, 5, 5, 5, 6, "gu", 6, 6, 6, 6, 6, 6, 6];
+        this.cubestate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53];
     }
 
     this.doAlgorithm = function(alg) {
