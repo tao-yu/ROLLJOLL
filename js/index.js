@@ -15,7 +15,7 @@ submitOll.addEventListener("click", function(){
 
 function updateImages(ollAlg){
     try {
-        var simplified = alg.cube.simplify(ollAlg)
+        var simplified = alg.cube.simplify(alg.cube.expand(ollAlg))
     }
     catch(err) {
         document.getElementById("invalid").innerHTML = "Invalid algorithm";
@@ -23,6 +23,7 @@ function updateImages(ollAlg){
     }
 
     updateROLLImages(simplified);
+    updateJOLLImages(simplified);
 }
 
 function updateROLLImages(ollAlg){
@@ -33,7 +34,7 @@ function updateROLLImages(ollAlg){
         "adjf":"F2 D F D' F L2' B' U B L2",
         "adjb":"U2 F2 D F D' F L2' B' U B L2 U2",
         "adjl":"U' F2 D F D' F L2' B' U B L2 U",
-        "adjr":"U F2 D F D' F L2' B' U B L2 U",
+        "adjr":"U F2 D F D' F L2' B' U B L2 U'",
     }
 
     var arrows = {
@@ -55,15 +56,54 @@ function updateROLLImages(ollAlg){
 }
 
 function updateJOLLImages(ollAlg){
+    inverted = alg.cube.invert(ollAlg);
+    var rc = new RubiksCube();
+    rc.doAlgorithm(inverted);
+    var cs = rc.cubestate;
+    var jollList = [];    
+    var pairs = [[1,5], [5,7], [7,3], [3,1], [1,7], [3,5]];
+
+    pairs.forEach(pair => {
+        var edge1 = cs[pair[0]];
+        var edge2 = cs[pair[1]];
+        var numToLoc = {1:"b", 3:"l", 5:"r", 7:"f"};
+        var loc1 = numToLoc[pair[0]];
+        var loc2 = numToLoc[pair[1]];
+        if (edge1[0] == edge2[0]){ //opposite relationship
+            jollList.push({
+                "edge1":loc1, 
+                "edge2":loc2,
+                "relation":"opp",
+                "implies":"opp"
+            });
+            jollList.push({
+                "edge1":loc1, 
+                "edge2":loc2,
+                "relation":"adj",
+                "implies":"adj"
+            });
+        } else { //adjacent relationship
+            jollList.push({
+                "edge1":loc1, 
+                "edge2":loc2,
+                "relation":"opp",
+                "implies":"adj"
+            });
+        }
+    });
+
+    jollList.forEach(joll => {
+        console.log(joll);
+    });
 
 }
 
 
-var rc = new RubiksCube();
-console.log(rc.cubestate)
 //CUBE OBJECT
 function RubiksCube() {
     this.cubestate = [1, "go", 1, "ro", 1, "ro", 1, "go", 1, 2, "ru", 2, 2, 2, 2, 2, 2, 2, 3, "gu", 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, "ru", 5, 5, 5, 5, 5, 5, 5, 6, "gu", 6, 6, 6, 6, 6, 6, 6];
+
+    //go = green oriented, ru = red unoriented etc.
 
     this.resetCube = function(){
         
