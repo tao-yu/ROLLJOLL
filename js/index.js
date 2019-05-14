@@ -14,7 +14,15 @@ submitOll.addEventListener("click", function(){
 });
 
 function updateImages(ollAlg){
-    updateROLLImages(ollAlg);
+    try {
+        var simplified = alg.cube.simplify(ollAlg)
+    }
+    catch(err) {
+        document.getElementById("invalid").innerHTML = "Invalid algorithm";
+        return;
+    }
+
+    updateROLLImages(simplified);
 }
 
 function updateROLLImages(ollAlg){
