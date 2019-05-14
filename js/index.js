@@ -19,9 +19,11 @@ function updateImages(ollAlg){
     }
     catch(err) {
         document.getElementById("invalid").innerHTML = "Invalid algorithm";
+        console.log(ollAlg);
+        console.log(err)
         return;
     }
-
+    document.getElementById("invalid").innerHTML = "&nbsp;";
     updateROLLImages(simplified);
     updateJOLLImages(simplified);
 }
