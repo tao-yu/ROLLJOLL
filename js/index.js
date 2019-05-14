@@ -14,6 +14,10 @@ submitOll.addEventListener("click", function(){
 });
 
 function updateImages(ollAlg){
+    updateROLLImages(ollAlg);
+}
+
+function updateROLLImages(ollAlg){
     
     var swapAlgs = {
         "noswap":"",
@@ -40,4 +44,8 @@ function updateImages(ollAlg){
         document.getElementById(perm).src = visualcubeUrl + ollAlg + swapAlgs[perm] + arrows[perm];
     });
     window.history.pushState(ollAlg, ollAlg, "?alg=" + encodeURI(ollAlg));
+}
+
+function updateJOLLImages(ollAlg){
+
 }
