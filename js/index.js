@@ -8,7 +8,7 @@ if (ollAlgFromUrl !== null){
     updateImages(ollAlgFromUrl);
     oll.value = ollAlgFromUrl;    
 } else {
-    updateJOLLImages("");
+    updateImages("");
 }
 
 submitOll.addEventListener("click", function(){
