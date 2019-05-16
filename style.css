@@ -2,14 +2,18 @@
     text-align: center;
 }
 
-#leftbox {
-    float:left;
+#joll_opp_outer {
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    width: 50%;
+    width: 100%;
 }
 
-#rightbox {
-    float:right;
+#joll_adj_outer {
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    width: 50%;
+    width: 100%;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif
 }
