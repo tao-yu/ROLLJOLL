@@ -7,6 +7,8 @@ var ollAlgFromUrl = url.searchParams.get("alg");
 if (ollAlgFromUrl !== null){
     updateImages(ollAlgFromUrl);
     oll.value = ollAlgFromUrl;    
+} else {
+    updateJOLLImages("");
 }
 
 submitOll.addEventListener("click", function(){
