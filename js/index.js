@@ -64,14 +64,15 @@ function updateROLLImages(ollAlg){
 
 function updateJOLLImages(ollAlg){
     document.getElementById("joll_opp").innerHTML = "";
-    document.getElementById("joll_adj").innerHTML = "";
+    document.getElementById("joll_adj_1").innerHTML = "";
+    document.getElementById("joll_adj_2").innerHTML = "";
 
     inverted = alg.cube.invert(ollAlg);
     var rc = new RubiksCube();
     rc.doAlgorithm(inverted);
     var cs = rc.cubestate;
     var jollList = [];    
-    var pairs = [[1,5], [5,7], [7,3], [3,1], [1,7], [3,5]];
+    var pairs = [[7,3], [5,7], [3,5], [1,5], [3,1], [1,7]]
 
     pairs.forEach(pair => {
         var edge1 = cs[pair[0]];
@@ -106,8 +107,9 @@ function updateJOLLImages(ollAlg){
             });
         }
     });
-
+    var imgNumber = 0;
     jollList.forEach(joll => {
+        
         var fc = Array(54).fill("l");
         if (joll["relation"] == "opp"){
             fc[joll["loc1"]] = "r";
@@ -131,8 +133,13 @@ function updateJOLLImages(ollAlg){
         if (joll["implies"] == "opp"){
             document.getElementById("joll_opp").appendChild(img);
         } else {
-            document.getElementById("joll_adj").appendChild(img);
+            if (imgNumber < 4){
+                document.getElementById("joll_adj_1").appendChild(img);
+            } else {
+                document.getElementById("joll_adj_2").appendChild(img);
+            }
         }
+        imgNumber++;
     });
 
 }
