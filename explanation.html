@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Explanation</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1>How To Use This Website</h1>
+
+        <h2>ROLL</h2>
+
+        ROLL is a technique that allows you to predict the corner permutation
+        of your PLL by observing the corners during OLL. The easiest way to do this is by using COLL or OLLCP recognition.
+
+        <h3>Example:</h3>
+
+        Enter <a href="index.html?alg=F R U R' U' F'">F R U R' U' F'</a> into the box at the top of the page and look at the fourth image:<br>
+
+        <img src="https://cubing.net/api/visualcube/?fmt=jpg&stage=coll&view=plan&case=F%20R%20U%20R%27%20U%27%20F%27U2%20F2%20D%20F%20D%27%20F%20L2%27%20B%27%20U%20B%20L2%20U2&arw=U0U2,U2U0"><br>
+
+        This means that using F R U R' U' F' to solve OLL when the corners are like <br>
+
+        <img src="https://cubing.net/api/visualcube/?fmt=jpg&stage=cll&view=plan&case=F%20R%20U%20R%27%20U%27%20F%27U2%20F2%20D%20F%20D%27%20F%20L2%27%20B%27%20U%20B%20L2%20U2"><br>
+
+        Will result in a PLL where the corners are swapped like this<br>
+
+        <img src="https://cubing.net/api/visualcube/?fmt=jpg&view=plan&arw=U0U2-white,U2U0-white&fc=llllllllllllllllllllllllllllllllllllllllllllllllllllll"><br> 
+
+        <h2>JOLL</h2>
+
+        JOLL is a technique that allows you to infer information about the edge permutation of your PLL by observing the edges during OLL. <br>
+
+        Terminology: two colours are <i>opposite</i> if they belong on opposite sides of the cube, i.e L and R, U and D, F and B.
+
+        <h3>Example</h3>
+        
+        Enter <a href="index.html?alg=F R U R' U' F'">F R U R' U' F'</a> into the box at the top of the page.<br><br>
+
+        There are two categories of cases <br><br>
+
+        The first two images represent cases which will result in a PLL that involves an "opposite swap" of edges or no swap at all, meaning that FU and BU are opposite colours and LU and RU are also opposite colours. The PLLs that fall into this category are N, Z, H, A, E, T and F perms. <br><br>
+
+        The last six images represent cases which result in a PLL that involves swap of adjacent edges. These are all of the PLLs that don't fall into the previous category: U, J, R, V, Y and G perms <br><br>
+
+        The image <br>
+
+        <img src="https://cubing.net/api/visualcube/?fmt=jpg&view=plan&fc=llyyyylryllllllllllyllllllllllllllllyrylllllllylllllll"> <br>
+        
+        represents a case in which the LU and UF edges are opposite colours. As this image is in the first category, we now know that whenever LU and UF are opposite colours, we will get an N, Z, H, A, E, T or F perm
+
+
+        The image <br>
+
+        <img src="https://cubing.net/api/visualcube/?fmt=jpg&view=plan&fc=llyyyylryllllllllllyllllllllllllllllygylllllllylllllll"><br>
+
+        Represents a case where the LU and UF edges are not opposite colours. As this falls into the second category, we now know that whenever LU and UR are not opposite colours, we will get a U, J, R, V, Y or G perm.
+    </body>
+</html>

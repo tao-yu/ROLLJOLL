@@ -3,17 +3,21 @@
 }
 
 #joll_opp_outer {
-    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     width: 100%;
 }
 
 #joll_adj_outer {
-    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     width: 100%;
 }
 
-h1 {
-    font-family: Arial, Helvetica, sans-serif
+#explanation {
+    position: fixed;
+    bottom: 2px;
+    right: 2px;
+}
+
+body {
+    font-family: sans-serif;
 }
