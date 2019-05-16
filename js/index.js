@@ -21,8 +21,11 @@ function updateImages(ollAlg){
     }
     catch(err) {
         document.getElementById("invalid").innerHTML = "Invalid algorithm";
-        console.log(ollAlg);
-        console.log(err)
+        return;
+    }
+
+    if (!isLLAlgorithm(simplified)){
+        document.getElementById("invalid").innerHTML = "Algorithm is not a last layer algorithm";
         return;
     }
     document.getElementById("invalid").innerHTML = "&nbsp;";
@@ -75,7 +78,7 @@ function updateJOLLImages(ollAlg){
         var edge2 = cs[pair[1]];
 
         var opp1 = [1,7,19,46];
-        var opp2 = [3,5,37, 10];
+        var opp2 = [3,5,37,10];
 
         var otherSide = {1:46, 5:10, 7:19, 3:37};
         var loc1 = edge1 > 8? pair[0] : otherSide[pair[0]];
@@ -115,6 +118,11 @@ function updateJOLLImages(ollAlg){
             fc[joll["loc2"]] = "g";
         }
         
+        var sticker;
+        for(sticker = 0; sticker < 9; sticker++){
+            fc[cs.indexOf(sticker)] = "y";
+        }
+        fc[4] = "y"
         var url = "https://cubing.net/api/visualcube/?fmt=jpg&view=plan&fc=" + fc.join("");
 
         var img = document.createElement("img");
@@ -129,11 +137,38 @@ function updateJOLLImages(ollAlg){
 
 }
 
+function isLLAlgorithm(algorithm){
+    //Assumes the algorithm is a valid algorithm
+    var rc = new RubiksCube();
+    rc.doAlgorithm(algorithm);
+    if (rc.cubestate[4] != 4){
+        return false;
+    }
+    while (rc.cubestate[22] != 22) {
+        rc.doY(1);
+    }
+    var cs = rc.cubestate;
+    [39, 21, 12, 48].forEach(startIndex =>{
+        var i;
+        for (i = startIndex; i < startIndex + 6; i++){
+            if (cs[i] != i) {
+                return false;
+            }
+        }
+    });
+    var i;
+    for (i = 27; i < 36; i++){
+        if (cs[i] != i) {
+            return false;
+        }
+    }
+    return true;
+}
 
 //CUBE OBJECT
 function RubiksCube() {
     this.cubestate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53];
-    //go = green oriented, ru = red unoriented etc.
+    
 
     this.resetCube = function(){
         this.cubestate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53];
