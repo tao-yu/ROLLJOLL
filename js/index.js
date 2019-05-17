@@ -21,11 +21,17 @@ function updateImages(ollAlg){
     }
     catch(err) {
         document.getElementById("invalid").innerHTML = "Invalid algorithm";
+        
+        updateROLLImages("");
+        updateJOLLImages("");
         return;
     }
 
     if (!isLLAlgorithm(simplified)){
         document.getElementById("invalid").innerHTML = "Algorithm is not a last layer algorithm";
+        
+        updateROLLImages("");
+        updateJOLLImages("");
         return;
     }
     document.getElementById("invalid").innerHTML = "&nbsp;";
