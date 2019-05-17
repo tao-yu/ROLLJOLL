@@ -31,6 +31,7 @@ function updateImages(ollAlg){
     document.getElementById("invalid").innerHTML = "&nbsp;";
     updateROLLImages(simplified);
     updateJOLLImages(simplified);
+    window.history.pushState(ollAlg, ollAlg, "?alg=" + encodeURI(ollAlg));
 }
 
 function updateROLLImages(ollAlg){
@@ -59,7 +60,6 @@ function updateROLLImages(ollAlg){
     cornerPerms.forEach(perm => {
         document.getElementById(perm).src = visualcubeUrl + ollAlg + swapAlgs[perm] + arrows[perm];
     });
-    window.history.pushState(ollAlg, ollAlg, "?alg=" + encodeURI(ollAlg));
 }
 
 function updateJOLLImages(ollAlg){
