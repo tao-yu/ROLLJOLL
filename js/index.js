@@ -60,7 +60,7 @@ function updateROLLImages(ollAlg){
         "adjr":"&arw=U2U8,U8U2",
     }
     
-    var visualcubeUrl = "https://cubing.net/api/visualcube/?fmt=jpg&stage=coll&view=plan&case="
+    var visualcubeUrl = "http://cube.crider.co.uk/visualcube.php?fmt=jpg&stage=coll&view=plan&case="
 
     cornerPerms = ["noswap", "diag", "adjf", "adjb", "adjl", "adjr"]
     cornerPerms.forEach(perm => {
@@ -131,7 +131,7 @@ function updateJOLLImages(ollAlg){
             fc[cs.indexOf(sticker)] = "y";
         }
         fc[4] = "y"
-        var url = "https://cubing.net/api/visualcube/?fmt=jpg&view=plan&fc=" + fc.join("");
+        var url = "http://cube.crider.co.uk/visualcube.php?fmt=jpg&view=plan&fc=" + fc.join("");
 
         var img = document.createElement("img");
         img.src = url;
