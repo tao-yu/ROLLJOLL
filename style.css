@@ -5,7 +5,7 @@
 #roll_box {
     border: 1px solid black;
     text-align: center;
-    width: fit-content;
+    display: table;
     margin:auto;
     padding: 10px 10px 10px 10px;
 }
@@ -13,7 +13,7 @@
 #joll_opp_outer {
     border: 1px solid black;
     text-align: center;
-    width: fit-content;
+    display:table;
     margin:auto;
     padding: 10px 10px 10px 10px;
 }
@@ -21,8 +21,7 @@
 #joll_adj_outer {
     border: 1px solid black;
     text-align: center;
-    width: 100%;
-    width: fit-content;
+    display: table;
     margin:auto;
     padding: 10px 10px 10px 10px;
 }
